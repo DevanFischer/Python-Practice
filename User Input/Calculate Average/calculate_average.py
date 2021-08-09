@@ -91,4 +91,5 @@ def printNums(numList):
     print(f'You entered the numbers {", ".join(str(n) for n in numList)}')
 
 
-main()
+if __name__ == '__main__':
+    main()
