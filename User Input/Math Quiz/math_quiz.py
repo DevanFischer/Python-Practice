@@ -22,72 +22,56 @@ Keep practicing!
 
 import random
 
-# main function
+
 def main():
-    # Local variables
     num1 = 0
     num2 = 0
     correctAnswer = 0
     userAnswer = 0
-    flag = "y"
-
-    # Display welcome message
+    isActive = True
     welcome()
 
-    while flag == "y":
-
-        # Get two random numbers
+    while isActive:
         num1, num2 = get2Nums(1, 100)
-
-        # Display math problem
         displayProblem(num1, num2)
-
-        # Get user answer
         userAnswer = getAnswer(num1, num2)
-
-        # Calculate correct answer
         correctAnswer = num1 + num2
-
-        # Display result
         showResult(correctAnswer, userAnswer)
-
-        # Ask user if they want to continue
-        flag = input(
-            "\nMore practice?\nEnter 'y' to continue or 'n' to quit: "
-        ).lower()
-        if flag != "y" and flag != "n":
-            print("\nPlease enter 'y' or 'n'")
-            flag = input(
-                "\nMore practice?\nEnter 'y' to continue or 'n' to quit: "
-            ).lower()
-
+        isActive = tryAgain()
     print("\nKeep practicing!")
 
 
-# Show a welcome message
 def welcome():
     print("Welcome to the math practice app!")
 
 
-# The get2Nums function takes in two arguments, min and max.
-# Then returns two random integers in that range.
-def get2Nums(min, max):
+def tryAgain() -> bool:
+    while True:
+        flag = input(
+            "\nMore practice?\nEnter 'y' to continue or 'n' to quit: "
+        ).lower()
+        if flag == "y":
+            return True
+        elif flag == "n":
+            return False
+        else:
+            print("\nPlease enter 'y' or 'n'")
+
+
+def get2Nums(min: int, max: int) -> int:
     num1 = random.randint(min, max)
     num2 = random.randint(min, max)
     return num1, num2
 
 
-# The displayProblem function accepts the numbers
-# and displays them
-def displayProblem(num1, num2):
+def displayProblem(num1: int, num2: int) -> None:
     print()
     print(format(num1, "5"))
     print("+", end="")
     print(format(num2, "4"))
 
 
-# The getAnswer function gets and returns the user answer
-def getAnswer(num1, num2):
+def getAnswer(num1: int, num2: int) -> None:
     while True:
         try:
             userAnswer = int(input("Enter answer: "))
@@ -97,13 +81,12 @@ def getAnswer(num1, num2):
             displayProblem(num1, num2)
 
 
-# The showResult function tells if user answer is correct or not
-def showResult(correctAnswer, answer):
+def showResult(correctAnswer: int, answer: int) -> None:
     if answer == correctAnswer:
         print("\nCorrect!")
     else:
         print(f"\nNot correct. Answer: {correctAnswer}")
 
 
-# Call the main function.
-main()
+if __name__ == '__main__':
+    main()
